@@ -1,3 +1,7 @@
 - name: print variables
+  hosts: localhost
+  vars:
+    my_variable: "Hello, Ansible!"
+  tasks: print   
   debug:
     msg: "The value of my_variable is {{ my_variable }}"
