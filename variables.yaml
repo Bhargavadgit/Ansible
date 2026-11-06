@@ -1,5 +1,6 @@
 - name: print variables
   hosts: localhost
+  collection: local
   vars:
     my_variable: "Hello, Ansible!"
   tasks: print   
