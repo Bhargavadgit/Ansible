@@ -1,8 +1,6 @@
-- name: print variables
-  hosts: localhost
-  collection: local
-  vars:
-    my_variable: "Hello, Ansible!"
-  tasks: print   
-  debug:
-    msg: "The value of my_variable is {{ my_variable }}"
+- name: ping demo
+  hosts: local # target ansible server itself
+  connection: local # It will not expect credentials
+  tasks: # tasks == modules == collections
+  - name: ping localhost
+    ping:
