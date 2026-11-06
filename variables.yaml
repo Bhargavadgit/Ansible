@@ -1,0 +1,3 @@
+- name: print variables
+  debug:
+    msg: "The value of my_variable is {{ my_variable }}"
