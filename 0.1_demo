@@ -1,0 +1,14 @@
+demo
+#to run ansible we need to download botocore 3.9 and boto 3 
+# give command (pip3.9 install botocore boto3)
+
+# we will change few configuration in ansible.cfg file, so we will place configuration file in current working directory
+#to create config file in current working directory
+#ansible-config init --disabled > ansible.cfg || cat ansible.cfg
+#copy from defaults to end and paste in ansible.cfg file 
+
+#few changes we will make in ansible.cfg file
+
+#inventory = inventory.ini --> it will tell ansible where to target hosts and avoiding writing -i inventory.ini in every command
+
+#stdout_callback = yaml --> it will give output in yaml to break down the output in more readable format
