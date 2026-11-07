@@ -8,7 +8,7 @@
     # instances :
     #   - mongodb
     #   - redis
-    # domain_zone: "Z07751372GOQ7XKXVY478"
+    domain_zone: "Z07751372GOQ7XKXVY478"
     domain_name: "bhar92s.store"
   tasks:
   - name: ec2_instance creation
@@ -28,8 +28,8 @@
   - name: R53_creation
     amazon.aws.route53:
       state: present
-      zone: "Z07751372GOQ7XKXVY478"
-      record: "domain_name"
+      zone: "{{ domain_zone }}"
+      record: "{{ domain_name }}"
       type: A
       ttl: 1
       value: 44.199.192.41
