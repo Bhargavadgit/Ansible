@@ -10,14 +10,14 @@
       - mongodb
       - redis
   tasks:
-    - name: ec2_user creation
-      amazon.aws.ec2_instance:
-        image_id: "{{ ami_id }}"
-        instance_type: "{{ instance_type }}"
-        security_groups:
-        - Roboshop-common
-        - "Roboshop-{{ item }}"
-        region: us-east-1
-        tags:
-        name: "Roboshop-{{ item }}"
+  - name: ec2_user creation
+    amazon.aws.ec2_instance:
+    image_id: "{{ ami_id }}"
+    instance_type: "{{ instance_type }}"
+    security_groups:
+    - Roboshop-common
+    - "Roboshop-{{ item }}"
+    region: us-east-1
+    tags:
+     name: "Roboshop-{{ item }}"
   loop: "{{ instances }}"
