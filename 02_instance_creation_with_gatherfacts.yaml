@@ -11,6 +11,8 @@
     instances:
      -mongodb
      -redis
+     -mysql
+     -rabbitmq
   tasks:
   - name: ec2_instance creation
     amazon.aws.ec2_instance:
@@ -32,7 +34,7 @@
   
   - name: print ec2_instance creation out put
     debug:
-      msg:"{{ ec2_instance }}"
+      msg: "{{ ec2_instance }}"
 
   # - name: R53_creation
   #   amazon.aws.route53:
