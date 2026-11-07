@@ -8,6 +8,8 @@
     # instances :
     #   - mongodb
     #   - redis
+    domain_zone: "Z07751372GOQ7XKXVY478"
+    domain_name: "bhar92s.store"
   tasks:
   - name: ec2_instance creation
     amazon.aws.ec2_instance:
@@ -23,16 +25,29 @@
     #loop: "{{ instances }}"
     when: state == "create"
 
-  - name: ec2_instance creation
-    amazon.aws.ec2_instance:
-      image_id: "{{ ami_id }}"
-      instance_type: "{{ instance_type }}"
-      security_groups:
-      - Roboshop-common
-      - "Roboshop-mongodb"
-      region: us-east-1
-      tags:
-      name: "Roboshop-mongodb"
-      state: absent
-    #loop: "{{ instances }}"
-    when: state == "delete"  
+  - name: R53_creation
+    amazon.aws.route53:
+      state: present
+      zone: "domain_zone"
+      record: "domain_name"
+      type: A
+      ttl: 1
+      value: 44.199.192.41
+
+
+
+
+
+  # - name: ec2_instance termination
+  #   amazon.aws.ec2_instance:
+  #     image_id: "{{ ami_id }}"
+  #     instance_type: "{{ instance_type }}"
+  #     security_groups:
+  #     - Roboshop-common
+  #     - "Roboshop-mongodb"
+  #     region: us-east-1
+  #     tags:
+  #     name: "Roboshop-mongodb"
+  #     state: absent
+  #   #loop: "{{ instances }}"
+  #   when: state == "delete"  
