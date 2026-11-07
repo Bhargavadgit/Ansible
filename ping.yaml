@@ -3,5 +3,5 @@
   connection: local # It will not expect credentials
   tasks: # tasks == modules == collections
    - name: ping localhost
-      debug:
+     debug:
         msg: "Pinging localhost"
