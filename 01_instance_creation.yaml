@@ -20,5 +20,5 @@
       region: us-east-1
       tags:
       name: "Roboshop-mongodb"
-    loop: "{{ instances }}"
+    #loop: "{{ instances }}"
     when: state == "create"
