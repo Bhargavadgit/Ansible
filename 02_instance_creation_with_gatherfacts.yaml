@@ -10,9 +10,7 @@
     domain_name: "bhar92s.store"
     instances:
      -mongodb
-      redis
-      mysql
-      rabbitmq
+     -redis
   tasks:
   - name: ec2_instance creation
     amazon.aws.ec2_instance:
