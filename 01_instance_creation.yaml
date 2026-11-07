@@ -9,7 +9,7 @@
     #   - mongodb
     #   - redis
     hosted_zone: "Z07751372GOQ7XKXVY478"
-    domain_zone: "bhar92s.store"
+    domain_name: "bhar92s.store"
   tasks:
   - name: ec2_instance creation
     amazon.aws.ec2_instance:
