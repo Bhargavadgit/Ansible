@@ -33,6 +33,7 @@
       type: A
       ttl: 1
       value: 44.199.192.41
+    when: state == "create"  
 
 
 
