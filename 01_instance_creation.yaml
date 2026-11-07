@@ -21,7 +21,3 @@
         tags:
         Name: "Roboshop-{{ item }}"
   loop: "{{ instances }}"
-  when: action == "create"
-  register= ec2-user_output
-  
-
