@@ -1,4 +1,5 @@
 demo
+#download ansible (sudo dnf ansible -y)
 #to run ansible we need to download botocore 3.9 and boto 3 
 # give command (pip3.9 install botocore boto3)
 
