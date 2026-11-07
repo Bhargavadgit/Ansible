@@ -1,0 +1,72 @@
+#in 01_instance_creation either we need to give instance name,ip address manuvally her we do automation by taking facts
+- name : instance creation
+  hosts: local
+  connection: local
+  become: no
+  vars:
+    ami_id: "ami-0055977a6e828a4f4"
+    instance_type: "t3.micro"
+    hosted_zone: "Z07751372GOQ7XKXVY478"
+    domain_name: "bhar92s.store"
+    instances:
+     -mongodb
+      redis
+      mysql
+      rabbitmq
+  tasks:
+  - name: ec2_instance creation
+    amazon.aws.ec2_instance:
+      image_id: "{{ ami_id }}"
+      instance_type: "{{ instance_type }}"
+      security_groups:
+      - Roboshop-common
+      - "Roboshop-{{ item }}"
+      region: us-east-1
+      tags:
+      name: "Roboshop-{{ item }}"
+      state: present
+    loop: "{{ instances }}"
+    when: state == "create"
+    register: "ec2_instance.{{ item }}"
+
+# register means we are storing the output data in variable listed names register
+# you can also see out by using msg module write bel0w    
+  
+  - name: print ec2_instance creation out put
+    debug:
+      msg:"{{ register }}"
+
+  # - name: R53_creation
+  #   amazon.aws.route53:
+  #     state: present
+  #     zone: "{{ domain_name }}"
+  #     record: "{{ item }}.{{ domain_name }}"
+  #     type: A
+  #     ttl: 1
+  #     value: 44.199.192.41
+  #   when: state == "create" 
+   
+
+  # - name: R53_creation
+  #   amazon.aws.route53:
+  #     state: absent
+  #     zone: "{{ domain_name }}"
+  #     record: "{{ item }}.{{ domain_name }}"
+  #     type: A
+  #     ttl: 1
+  #     value: 44.199.192.41
+  #   when: state == "delete" 
+
+  # - name: ec2_instance termination
+  #   amazon.aws.ec2_instance:
+  #     image_id: "{{ ami_id }}"
+  #     instance_type: "{{ instance_type }}"
+  #     security_groups:
+  #     - Roboshop-common
+  #     - "Roboshop-{{ item }}"
+  #     region: us-east-1
+  #     tags:
+  #     name: "Roboshop-{{ item }}"
+  #     state: absent
+  #   loop: "{{ instances }}"
+  #   when: state == "delete"  
