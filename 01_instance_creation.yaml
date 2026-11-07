@@ -19,5 +19,5 @@
         - "Roboshop-{{ item }}"
         region: us-east-1
         tags:
-        Name: "Roboshop-{{ item }}"
+        name: "Roboshop-{{ item }}"
   loop: "{{ instances }}"
