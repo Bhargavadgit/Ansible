@@ -16,9 +16,9 @@
       instance_type: "{{ instance_type }}"
       security_groups:
       - Roboshop-common
-      - "Roboshop-{{ item }}"
+      - "Roboshop-mongodb"
       region: us-east-1
       tags:
-      name: "Roboshop-{{ item }}"
+      name: "Roboshop-mongodb"
     loop: "{{ instances }}"
     when: state == "create"
