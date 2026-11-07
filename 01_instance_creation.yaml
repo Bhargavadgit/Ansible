@@ -1,23 +1,27 @@
 - name : instance creation
   hosts: local
   connection: local
-
+  become: no
   vars:
-  ami_id: "ami-0055977a6e828a4f4"
-  instance_type: "t3.micro"
-  instances :
+    action: create
+    ami_id: "ami-0055977a6e828a4f4"
+    instance_type: "t3.micro"
+    instances :
       - mongodb
       - redis
   tasks:
-    -name: ec2_user creation
-    amazon.aws.ec2_instance:
-      image_id: "{{ ami_id }}"
-      instance_type: "{{ instance_type }}"
-      security_groups:
-      - Roboshop-common
-      - "Roboshop-{{ item }}"
-      region: us-east-1
-      state: create
-      tags:
-      Name: "Roboshop-{{ item }}"
+    - name: ec2_user creation
+      amazon.aws.ec2_instance:
+        image_id: "{{ ami_id }}"
+        instance_type: "{{ instance_type }}"
+        security_groups:
+        - Roboshop-common
+        - "Roboshop-{{ item }}"
+        region: us-east-1
+        tags:
+        Name: "Roboshop-{{ item }}"
   loop: "{{ instances }}"
+  when: action == "create"
+  register= ec2-user_output
+  
+
