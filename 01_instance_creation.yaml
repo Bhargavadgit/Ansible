@@ -3,7 +3,6 @@
   connection: local
   become: no
   vars:
-    state: create
     ami_id: "ami-0055977a6e828a4f4"
     instance_type: "t3.micro"
     # instances :
@@ -22,3 +21,17 @@
       name: "Roboshop-mongodb"
     #loop: "{{ instances }}"
     when: state == "create"
+
+  tasks:
+  - name: ec2_instance creation
+    amazon.aws.ec2_instance:
+      image_id: "{{ ami_id }}"
+      instance_type: "{{ instance_type }}"
+      security_groups:
+      - Roboshop-common
+      - "Roboshop-mongodb"
+      region: us-east-1
+      tags:
+      name: "Roboshop-mongodb"
+    #loop: "{{ instances }}"
+    when: state == "delete"  
