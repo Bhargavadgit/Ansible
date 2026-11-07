@@ -27,14 +27,14 @@
       state: present
     loop: "{{ instances }}"
     when: state == "create"
-    register: "ec2_instance.{{ item }}"
+    register: ec2_instance
 
 # register means we are storing the output data in variable listed names register
 # you can also see out by using msg module write bel0w    
   
   - name: print ec2_instance creation out put
     debug:
-      msg:"{{ register }}"
+      msg:"{{ ec2_instance }}"
 
   # - name: R53_creation
   #   amazon.aws.route53:
