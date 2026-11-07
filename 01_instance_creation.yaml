@@ -19,6 +19,7 @@
       region: us-east-1
       tags:
       name: "Roboshop-mongodb"
+      state: present
     #loop: "{{ instances }}"
     when: state == "create"
 
@@ -33,5 +34,6 @@
       region: us-east-1
       tags:
       name: "Roboshop-mongodb"
+      state: absent
     #loop: "{{ instances }}"
     when: state == "delete"  
