@@ -35,20 +35,26 @@
       value: 44.199.192.41
     when: state == "create"  
 
+  - name: R53_creation
+    amazon.aws.route53:
+      state: absent
+      zone: "{{ domain_name }}"
+      record: "mongodb.{{ domain_name }}"
+      type: A
+      ttl: 1
+      value: 44.199.192.41
+    when: state == "delete" 
 
-
-
-
-  # - name: ec2_instance termination
-  #   amazon.aws.ec2_instance:
-  #     image_id: "{{ ami_id }}"
-  #     instance_type: "{{ instance_type }}"
-  #     security_groups:
-  #     - Roboshop-common
-  #     - "Roboshop-mongodb"
-  #     region: us-east-1
-  #     tags:
-  #     name: "Roboshop-mongodb"
-  #     state: absent
-  #   #loop: "{{ instances }}"
-  #   when: state == "delete"  
+  - name: ec2_instance termination
+    amazon.aws.ec2_instance:
+      image_id: "{{ ami_id }}"
+      instance_type: "{{ instance_type }}"
+      security_groups:
+      - Roboshop-common
+      - "Roboshop-mongodb"
+      region: us-east-1
+      tags:
+      name: "Roboshop-mongodb"
+      state: absent
+    #loop: "{{ instances }}"
+    when: state == "delete"  
