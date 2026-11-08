@@ -33,7 +33,7 @@
       record: "redis.{{ domain_name }}"
       type: A
       ttl: 1
-      value: "{{ instances.private_ip_address }}"
+      value: "{{ redis.private_ip_address }}"
       overwrite: true
     when: state == "create"  
 
