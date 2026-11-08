@@ -30,7 +30,7 @@
       record: "redis.{{ domain_name }}"
       type: A
       ttl: 1
-      value: "{{ ec2_instance.results }}"
+      value: "{{ ec2_instance.results.praviteip }}"
       overwrite: true
     when: state == "create"  
 
