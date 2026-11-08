@@ -14,7 +14,7 @@
     service:
      name: mongod
      state: started
-     enable: yes
+     enabled: yes
   - name: replace adress in conf file
     replace:
      path: /etc/mongod.conf
