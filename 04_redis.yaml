@@ -4,3 +4,4 @@
   tasks:
   - name: delete depault version
     command: dnf module disable redis -y
+  - name:  
