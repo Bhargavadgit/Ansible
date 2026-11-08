@@ -1,5 +1,5 @@
 - name: mongoserver_creation
-  host: mongodb
+  hosts: mongodb
   connection: mongodb
   become: yes
   tasks:
