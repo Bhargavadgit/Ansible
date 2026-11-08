@@ -9,7 +9,7 @@
   - name: Install MongoDB   
     package:
      state: present
-     name: mongodb-org -y
+     name: mongodb-org
   - name: Start & enable the MongoDB service   
     service:
      name: mongod
