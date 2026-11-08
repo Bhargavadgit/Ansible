@@ -45,13 +45,14 @@
     when: state == "create" 
    
 
-  - name: R53_creation
+  - name: R53_delete
     amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
       record: "{{ item }}.{{ domain_name }}"
       type: A
       ttl: 1
+    loop: "{{ item }}"  
     when: state == "delete" 
 
   - name: ec2_instance termination
