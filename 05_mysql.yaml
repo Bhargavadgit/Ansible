@@ -1,0 +1,17 @@
+- name: sqlserver
+  hosts: mysql
+  become: yes
+  tasks:
+  - name: install mysql
+    pacakage:
+    - name: mysql-server
+      state: present
+  - name: enable mysql
+    service:
+    - name: mysqld
+      enabled: true
+  - name: start mysql
+    service:
+    - name: mysqld
+      state: started
+          
