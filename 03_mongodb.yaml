@@ -21,7 +21,10 @@
      replace: '0.0.0.0'
   - name: reStart the MongoDB service   
     service:
-     state: restarted   
+     state: restarted
+  - name: print mongo.repo
+    debug:
+     msg: "{{ mongodb_hosts }}"    
 
 
      
