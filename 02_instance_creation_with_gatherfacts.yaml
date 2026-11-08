@@ -52,7 +52,7 @@
       record: "{{ item }}.{{ domain_name }}"
       type: A
       ttl: 1
-    loop: "{{ item }}"  
+    loop: "{{ instances }}"   
     when: state == "delete" 
 
   - name: ec2_instance termination
