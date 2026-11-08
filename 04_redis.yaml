@@ -1,4 +1,4 @@
-- name: install_redis
+- name: redisserver_creation
   hosts: redis
   become: yes
   tasks:
