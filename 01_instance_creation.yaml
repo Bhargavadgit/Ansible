@@ -31,7 +31,7 @@
       type: A
       ttl: 1
       value: "{{ ec2_instance.results }}"
-    overwrite: true  
+      overwrite: true  
     when: state == "create"  
 
   - name: R53_delete
