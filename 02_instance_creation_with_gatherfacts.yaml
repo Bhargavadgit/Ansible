@@ -46,15 +46,15 @@
     register: Pravite_ip 
    
 
-  - name: R53_delete
-    amazon.aws.route53:
-      state: absent
-      zone: "{{ domain_name }}"
-      record: "{{ item }}.{{ domain_name }}"
-      type: A
-      ttl: 1
-    loop: "{{ instances }}"   
-    when: state == "delete" 
+  # - name: R53_delete
+  #   amazon.aws.route53:
+  #     state: absent
+  #     zone: "{{ domain_name }}"
+  #     record: "{{ item }}.{{ domain_name }}"
+  #     type: A
+  #     ttl: 1
+  #   loop: "{{ instances }}"   
+  #   when: state == "delete" 
 
   - name: ec2_instance termination
     amazon.aws.ec2_instance:
