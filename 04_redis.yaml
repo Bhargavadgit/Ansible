@@ -1,0 +1,27 @@
+- name: install redis
+  hosts: redis
+  became: yes
+  tasks:
+  - name: disable redis default
+    commnd: dnf module disable redis -y
+  - name: enable redis 7 version
+    service:
+     name: redis:7
+     enabled: yes
+     state: present
+  - name: install redis
+    pacakage:
+     name: redis
+     state: present
+  - name: replace ip adress in redis.conf  
+    replace:
+     path: /etc/redis/redis.conf
+     regexp: '127.0.0.1'
+     replace: '0.0.0.0'
+  - name: replace text in redis.conf  
+    lineinfile:
+     path: /etc/redis/redis.conf
+     regexp: '^#?protected-mode yes'
+     line: 'protected-mode no'
+
+    
