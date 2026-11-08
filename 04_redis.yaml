@@ -1,4 +1,4 @@
-- name: install redis
+- name: install_redis
   hosts: redis
   become: yes
   tasks:
