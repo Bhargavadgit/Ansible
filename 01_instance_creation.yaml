@@ -22,34 +22,37 @@
     #loop: "{{ instances }}"
     when: state == "create"
     register: ec2_instance
+  - name: output
+    debug:
+     msg: "{{ ec2_instance }}"
 
-  - name: R53_creation
-    amazon.aws.route53:
-      state: present
-      zone: "{{ domain_name }}"
-      record: "redis.{{ domain_name }}"
-      type: A
-      ttl: 1
-      value: "{{ item.instances[0].private_ip_address }}"
-      overwrite: true
-    when: state == "create"  
+  # - name: R53_creation
+  #   amazon.aws.route53:
+  #     state: present
+  #     zone: "{{ domain_name }}"
+  #     record: "redis.{{ domain_name }}"
+  #     type: A
+  #     ttl: 1
+  #     value: "{{ item.instances[0].private_ip_address }}"
+  #     overwrite: true
+  #   when: state == "create"  
 
-  - name: R53_delete
-    amazon.aws.route53:
-      state: absent
-      zone: "{{ domain_name }}"
-      record: "redis.{{ domain_name }}"
-      type: A
-      ttl: 1
-    when: state == "delete" 
+  # - name: R53_delete
+  #   amazon.aws.route53:
+  #     state: absent
+  #     zone: "{{ domain_name }}"
+  #     record: "redis.{{ domain_name }}"
+  #     type: A
+  #     ttl: 1
+  #   when: state == "delete" 
 
-  - name: ec2_instance termination
-    amazon.aws.ec2_instance:
-      image_id: "{{ ami_id }}"
-      instance_type: "{{ instance_type }}"
-      region: us-east-1
-      tags:
-      name: "Roboshop-redis"
-      state: absent
-    #loop: "{{ instances }}"
-    when: state == "delete"
+  # - name: ec2_instance termination
+  #   amazon.aws.ec2_instance:
+  #     image_id: "{{ ami_id }}"
+  #     instance_type: "{{ instance_type }}"
+  #     region: us-east-1
+  #     tags:
+  #     name: "Roboshop-redis"
+  #     state: absent
+  #   #loop: "{{ instances }}"
+  #   when: state == "delete"
