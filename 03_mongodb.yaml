@@ -9,9 +9,10 @@
   - name: Install MongoDB   
     package:
      state: present
-     name: mongodb
+     name: mongodb-org -y
   - name: Start & enable the MongoDB service   
     service:
+     name: mongod
      state: started
      enable: yes
   - name: replace adress in conf file
@@ -21,6 +22,7 @@
      replace: '0.0.0.0'
   - name: reStart the MongoDB service   
     service:
+     name: mongod
      state: restarted
   - name: print mongo.repo
     debug:
