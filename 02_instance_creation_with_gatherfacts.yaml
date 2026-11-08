@@ -41,7 +41,7 @@
       ttl: 1
       value: "{{ item.instance[0].private_ip_address }}"
       overwrite: true
-    loop: "{{ instances }}"
+    loop: "{{ ec2_instance.results }}"
     when: state == "create" 
    
 
@@ -49,22 +49,16 @@
     amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
-      record: "{{ item.item }}.{{ domain_name }}"
+      record: "{{ item }}.{{ domain_name }}"
       type: A
       ttl: 1
-      value: "{{ item.instance[0].private_ip_address }}"
     when: state == "delete" 
 
   - name: ec2_instance termination
     amazon.aws.ec2_instance:
-      image_id: "{{ ami_id }}"
-      instance_type: "{{ instance_type }}"
-      security_groups:
-      - Roboshop-common
-      - "Roboshop-{{ item }}"
-      region: us-east-1
-      tags:
       name: "Roboshop-{{ item }}"
       state: absent
+      region: us-east-1
+      wait: false
     loop: "{{ instances }}"
     when: state == "delete"  
