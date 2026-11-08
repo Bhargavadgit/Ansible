@@ -4,4 +4,8 @@
   tasks:
   - name: delete depault version
     command: dnf module disable redis -y
-  - name:  
+  - name:  enable & install redis
+    package:
+     - name: redis
+       state: present
+       enabled: true
