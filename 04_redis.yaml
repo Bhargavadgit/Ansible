@@ -1,6 +1,6 @@
 - name: Install_redis
   hosts: redis
-  became: yes
+  become: yes
   tasks:
   - name: delete depault version
     command: dnf module disable redis -y
