@@ -14,44 +14,42 @@
       instance_type: "{{ instance_type }}"
       security_groups:
       - Roboshop-common
-      - "Roboshop-mongodb"
+      - "Roboshop-redis"
       region: us-east-1
       tags:
-      name: "Roboshop-mongodb"
+      name: "Roboshop-redis"
       state: present
     #loop: "{{ instances }}"
     when: state == "create"
+    register: ec2_instance
 
   - name: R53_creation
     amazon.aws.route53:
       state: present
       zone: "{{ domain_name }}"
-      record: "mongodb.{{ domain_name }}"
+      record: "redis.{{ domain_name }}"
       type: A
       ttl: 1
-      value: 44.199.192.41
+      value: "{{ ec2_instance.results }}"
+    overwrite: true  
     when: state == "create"  
 
-  - name: R53_creation
+  - name: R53_delete
     amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
-      record: "mongodb.{{ domain_name }}"
+      record: "redis.{{ domain_name }}"
       type: A
       ttl: 1
-      value: 44.199.192.41
     when: state == "delete" 
 
   - name: ec2_instance termination
     amazon.aws.ec2_instance:
       image_id: "{{ ami_id }}"
       instance_type: "{{ instance_type }}"
-      security_groups:
-      - Roboshop-common
-      - "Roboshop-mongodb"
       region: us-east-1
       tags:
-      name: "Roboshop-mongodb"
+      name: "Roboshop-redis"
       state: absent
     #loop: "{{ instances }}"
     when: state == "delete"  
