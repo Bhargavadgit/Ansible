@@ -31,7 +31,7 @@
       type: A
       ttl: 1
       value: "{{ ec2_instance.results }}"
-      overwrite: true  
+      overwrite: true
     when: state == "create"  
 
   - name: R53_delete
@@ -52,4 +52,4 @@
       name: "Roboshop-redis"
       state: absent
     #loop: "{{ instances }}"
-    when: state == "delete"  
+    when: state == "delete"
