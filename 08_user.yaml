@@ -43,8 +43,7 @@
      remote_src: yes
   - name: npm install    
     ansible.builtin.file:
-     path: /app
-     state: present 
+     path: /app  
   - name: copy repo with templite
     ansible.builtin.template:
      src: user.service.j2
