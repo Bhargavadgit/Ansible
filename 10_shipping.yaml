@@ -10,6 +10,7 @@
      - maven
      - java-25-openjdk-devel
      - maven-openjdk25
+     - mysql  
      state: present
   - name: adding application user
     ansible.builtin.user:
@@ -48,8 +49,32 @@
      chdir: /app  
   - name: Move the JAR file using Linux mv
     ansible.builtin.command: mv /path/to/source/app.jar /path/to/destination/app.jar
-     args:
+    args:
     chdir: /app
+  - name: check cities loaded or not 
+    shell: mysql -h "{{ mysql_host }}" -u root -p{{ mysql_root_password }} -N -B -e "SELECT COUNT(*) FROM cities.cities;"
+    register: cities_count
+  - name: loading cities
+    shell: mysql -h {{ mysql_host }} -uroot -pRoboShop@1 < /app/db/master-data.sql
+    when: cities_count.stdout | int == 0 
+  - name: create app user
+    shell: mysql -h {{ mysql_host }} -uroot -pRoboShop@1 < /app/db/app-user.sql
+  - name: coping shiping service
+    template:
+     src: shipping.service.j2
+     dest: /etc/systemd/system/shipping.service
+  - name: systemctl daemon-reload
+    ansible.builtin.systemd_service:
+     daemon_reload: true
+  - name:  enable  & start shipping
+    service:
+     name: shipping
+     state: restarted
+     enabled: yes       
+
+
+      
+
            
 
 

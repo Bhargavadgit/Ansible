@@ -7,3 +7,10 @@ rabbitmq_host: mongodb.bhar92s.store
 catalogue_host: mongodb.bhar92s.store
 user_host: mongodb.bhar92s.store
 cart_host: cart.bhar92s.store
+shipping_host: shipping.bhar92s.store
+payment_host: payment.bhar92s.store
+mysql_root_password: RoboShop@1
+shipping_db_user: shipping
+shipping_db_password: RoboShop@1
+rabbitmq_user: roboshop
+rabbitmq_password: roboshop123
