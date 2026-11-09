@@ -14,10 +14,10 @@
       instance_type: "{{ instance_type }}"
       security_groups:
       - Roboshop-common
-      - "Roboshop-catalogue"
+      - "Roboshop-user"
       region: us-east-1
       tags:
-      name: "Roboshop-catalogue"
+      name: "Roboshop-user"
       state: present
     #loop: "{{ instances }}"
     when: state == "create"
@@ -30,7 +30,7 @@
     amazon.aws.route53:
       state: present
       zone: "{{ domain_name }}"
-      record: "catalogue.{{ domain_name }}"
+      record: "user.{{ domain_name }}"
       type: A
       ttl: 1
       value: "{{ ec2_instance.instances[0].private_ip_address }}"
@@ -41,7 +41,7 @@
     amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
-      record: "catalogue.{{ domain_name }}"
+      record: "user.{{ domain_name }}"
       type: A
       ttl: 1
     when: state == "delete" 
@@ -52,7 +52,7 @@
       instance_type: "{{ instance_type }}"
       region: us-east-1
       tags:
-      name: "Roboshop-catalogue"
+      name: "Roboshop-user"
       state: absent
     #loop: "{{ instances }}"
     when: state == "delete"
