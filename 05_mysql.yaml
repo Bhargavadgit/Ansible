@@ -24,6 +24,6 @@
       name: root
       password: "{{ mysql_secure_installation }}"
 # linux user will create password if not exist      
-      check_implicit_admin: true
+#      check_implicit_admin: true
       state: present
           
