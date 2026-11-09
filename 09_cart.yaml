@@ -43,7 +43,7 @@
      remote_src: true
   - name: npm install
     community.general.npm:
-    path: /app   
+     path: /app   
   - name: systemctl daemon-reload
     ansible.builtin.systemd_service:
      daemon_reload: true
