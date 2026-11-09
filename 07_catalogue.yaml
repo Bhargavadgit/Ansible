@@ -15,7 +15,9 @@
   - name: add user to catalogue
     ansible.builtin.user:
         name: roboshop
-        state: present
+        home: /app
+        syetem: true
         shell: /sbin/nologin
         comment: roboshop system user
-        create_home: /app       
+# by defalut it will create /home/user        
+        create_home: false       
