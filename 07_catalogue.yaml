@@ -68,7 +68,8 @@
 
   - name: itemlist
     debug:
-     msg: {{ items_output }}  
+     msg: "{{ items_output }}" 
+
   # - name: Loading products  
   #   shell: mongosh --host {{ mongo_host }} </app/db/master-data.js
   #   when: items_output.
