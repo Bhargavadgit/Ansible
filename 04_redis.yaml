@@ -2,6 +2,10 @@
   hosts: redis
   become: yes
   tasks:
+  - name: disable defailt redis
+    package:
+     name: redis
+     state: absent
   - name: enable redis 7
     command: dnf module enable redis:7 -y
   
