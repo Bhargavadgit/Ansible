@@ -37,6 +37,17 @@
       overwrite: true
     when: state == "create"  
 
+  - name: R53_creation
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "{{ domain_name }}"
+      type: A
+      ttl: 1
+      value: "{{ ec2_instance.instances[0].private_ip_address }}"
+      overwrite: true
+    when: state == "create" and ec2_instance.item = "frontend" 
+
   - name: R53_delete
     amazon.aws.route53:
       state: absent
