@@ -50,6 +50,6 @@
   - name:  enable  & start cart
     service:
      name: cart
-     state: restart
+     state: restarted
      enabled: yes       
 

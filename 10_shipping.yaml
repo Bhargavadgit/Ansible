@@ -1,0 +1,55 @@
+- name: cart_server
+  hosts: cart
+  become: yes
+  tasks:
+  - name:  enable maven:3.9 -y
+    command: dnf module enable maven:3.9 -y
+  - name: install maven java-25-openjdk-devel -y 
+    dnf:  
+     name:
+     - maven
+     - java-25-openjdk-devel
+     - maven-openjdk25
+     state: present
+  - name: adding application user
+    ansible.builtin.user:
+     name: roboshop
+     system: yes
+     home: /app   
+     shell: /sbin/nologin
+     comment: roboshop system user
+     create_home: false
+  - name: remove old dir
+    ansible.builtin.file:
+     path: /app
+     state: absent   
+  - name: remove old file
+    ansible.builtin.file:
+     path: /tmp/shipping.zip
+     state: absent 
+  - name: create new dir
+    ansible.builtin.file:
+     path: /app
+  - name: download dir
+    ansible.builtin.get_url:
+     url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/shipping-v4.zip
+     dest: /tmp/shipping.zip  
+  - name: unzipping
+    ansible.builtin.unarchive:
+     src: /tmp/shipping.zip 
+     dest: /app
+     remote_src: true  
+  - name: npm install
+    community.general.npm:
+     path: /app   
+  - name: mvn clean package
+    ansible.builtin.command:
+     cmd: mvn clean package
+     chdir: /app  
+  - name: Move the JAR file using Linux mv
+    ansible.builtin.command: mv /path/to/source/app.jar /path/to/destination/app.jar
+     args:
+    chdir: /app
+           
+
+

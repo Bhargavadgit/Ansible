@@ -6,3 +6,4 @@ mysql_host: mongodb.bhar92s.store
 rabbitmq_host: mongodb.bhar92s.store
 catalogue_host: mongodb.bhar92s.store
 user_host: mongodb.bhar92s.store
+cart_host: cart.bhar92s.store
