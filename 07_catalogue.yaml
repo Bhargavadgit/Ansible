@@ -79,6 +79,7 @@
      daemon_reload: true
   - name: systemctl enable catalogue & start catalogue
     service:
+     name: catalogue
      state: started
      enabled: yes
   
