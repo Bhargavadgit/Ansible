@@ -65,6 +65,10 @@
   - name: check existing tems available
     command: mongosh --host {{ mongo_host }} --quiet --eval 'db.getSiblingDB("catalogue").products.countDocuments()'
     register: items_output
+
+  - name: itemlist
+    debug:
+     msg: {{ items_output }}  
   # - name: Loading products  
   #   shell: mongosh --host {{ mongo_host }} </app/db/master-data.js
   #   when: items_output.
