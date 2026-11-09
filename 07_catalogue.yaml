@@ -70,17 +70,25 @@
     debug:
      msg: "{{ items_output }}" 
 
-  # - name: Loading products  
-  #   shell: mongosh --host {{ mongo_host }} </app/db/master-data.js
-  #   when: items_output.
+  - name: Loading products  
+    shell: mongosh --host {{ mongo_host }} </app/db/master-data.js
+    when: items_output.stdout | int == 0
+  
+  - name: systemctl daemon-reload
+    ansible.builtin.systemd_service:
+     daemon_reload: true
+  - name: systemctl enable catalogue & start catalogue
+    service:
+     state: started
+     enabled: yes
+  
 
 
 
 
 
-  # - name: system demon reload
-  #   ansible.builtin.systemd_service:
-  #    daemon_reload: true
+
+  
 
        
                
