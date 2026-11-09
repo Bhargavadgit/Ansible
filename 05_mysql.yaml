@@ -16,14 +16,14 @@
     service:
       name: mysqld
       state: started
-# - name: set root password
-#   command: mysql_secure_installation --set-root-pass RoboShop@1
+  - name: set root password
+    command: mysql_secure_installation --set-root-pass RoboShop@1
 # through ansible
-  - name: set password through Ansible module
-    user:
-      name: root
-      password: "{{ mysql_secure_installation }}"
-# linux user will create password if not exist      
-      update_password: always
-      no_log: true
+#   - name: set password through Ansible module
+#     user:
+#       name: root
+#       password: "{{ mysql_secure_installation }}"
+# # linux user will create password if not exist      
+#       update_password: always
+#       no_log: true
           
