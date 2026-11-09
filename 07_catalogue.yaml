@@ -1,0 +1,21 @@
+- name: catalogue_server
+  hosts: catalogue
+  become: yes
+  tasks:
+  - name: diable default version
+    dnf:
+     name: nodejs
+     state: absent
+  - name: enable nodejs:24 -y 
+    command: dnf module enable nodejs:24 -y   
+  - name: install nodejs -y
+    dnf:
+     name: nodejs
+     state: present
+  - name: add user to catalogue
+    ansible.builtin.user:
+        name: roboshop
+        state: present
+        shell: /sbin/nologin
+        comment: roboshop system user
+        create_home: /app       
