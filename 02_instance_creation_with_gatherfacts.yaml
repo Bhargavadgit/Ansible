@@ -44,6 +44,19 @@
     loop: "{{ ec2_instance.results }}"
     when: state == "create"
     register: Pravite_ip 
+
+  - name: R53_creation
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "{{ domain_name }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private_ip_address }}"
+      overwrite: true
+    loop: "{{ ec2_instance.results }}"
+    when: state == "create" 
+    register: private_ip and item.item == "frontend"
    
 
   - name: R53_delete
