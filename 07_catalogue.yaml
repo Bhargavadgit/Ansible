@@ -49,9 +49,9 @@
     community.general.npm:
      path: /app 
 # instedy of copy module we are using templete because mongo_host should replace with valve
-  - name: configure catalogue.services
+  - name: copy catalogue.services
     ansible.builtin.template:
-     src: Ansible/group_vars/catalogue.service.j2
+     src: catalogue.service
      dest: /etc/systemd/system/catalogue.service
   - name: load master data
     copy:
