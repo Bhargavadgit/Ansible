@@ -53,6 +53,7 @@
     ansible.builtin.template:
      src: catalogue.service
      dest: /etc/systemd/system/catalogue.service
+     remote_src: yes
   - name: load master data
     copy:
      src: mongo.repo
