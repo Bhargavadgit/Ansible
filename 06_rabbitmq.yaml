@@ -6,12 +6,14 @@
     copy:
      src: rabbitmq.repo
      dest: /etc/yum.repos.d/rabbitmq.repo
+
   - name: install rabbit mq
-    package: 
+    dnf: 
      name: 
       - erlang
       - rabbitmq-server
      state: present
+  
   - name: enable & start
     service:
      name: rabbitmq-server
