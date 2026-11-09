@@ -6,7 +6,7 @@
     copy:
      src: rabbitmq.repo
      dest: /etc/yum.repos.d/rabbitmq.repo
-
+# if you use packaged ansible will check Package in serve, if you use dnf it will install given details
   - name: install rabbit mq
     dnf: 
      name: 
