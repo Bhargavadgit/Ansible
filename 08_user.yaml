@@ -34,8 +34,8 @@
      state: directory  
   - name: download applications
     ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/user-v4.zip
-    dest: /tmp/user.zip
+     url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/user-v4.zip
+     dest: /tmp/user.zip
   - name: unzip applications
     ansible.builtin.unarchive:
      src: /tmp/user.zip 
