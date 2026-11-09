@@ -2,4 +2,58 @@
   hosts: user
   become: yes
   tasks:
-  - name: 
+  - name: dnf module disable nodejs -y
+    package:
+     name: nodejs
+     state: absent
+  - name: dnf module enable nodejs:24 -y
+    command: dnf module enable nodejs:24 -y
+  - name: dnf install nodejs -y
+    dnf: 
+     name: nodejs
+     state: present
+  - name: syetem user adding
+    ansible.builtin.user:
+        name: roboshop
+        system: yes                 
+        shell: /sbin/nologin     
+        create_home: false  
+        home: /app  
+        comment: roboshop system user         
+  - name: remove old dir 
+    ansible.builtin.file:
+     path: /app
+     state: absent
+  - name: remove old file
+    ansible.builtin.file:
+     path: /tmp/user.zip
+     state: absent 
+  - name: create dir 
+    ansible.builtin.file:
+    path: /app
+    state: directory  
+  - name: download applications
+    ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/user-v4.zip
+    dest: /tmp/user.zip
+  - name: unzip applications
+    ansible.builtin.unarchive:
+     src: /tmp/user.zip 
+     dest: /app  
+     remote_src: yes
+  - name: npm install    
+    ansible.builtin.file:
+     path: /app
+     state: present 
+  - name: copy repo with templite
+    ansible.builtin.template:
+     src: user.service.j2
+     dest: /etc/systemd/system/user.service
+  - name: demon-reload
+    ansible.builtin.systemd_service:
+     daemon_reload: true  
+  - name: enable & restart user
+    service: 
+     name: user
+     state: started
+     enabled: yes      
