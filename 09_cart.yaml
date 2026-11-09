@@ -44,6 +44,10 @@
   - name: npm install
     community.general.npm:
      path: /app   
+  - name: configure cart service
+    temlate:
+     src: cart.service.j2
+     dest: /etc/systemd/system/cart.service
   - name: systemctl daemon-reload
     ansible.builtin.systemd_service:
      daemon_reload: true
