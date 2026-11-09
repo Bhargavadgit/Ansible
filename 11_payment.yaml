@@ -38,8 +38,9 @@
      requirements: /app/requirements.txt
      virtualenv: /app/.venv
      virtualenv_command: python3.14 -m venv
+
   - name: configure payment service
-    temlate:
+    ansible.builtin.template:
      src: payment.service.j2
      dest: /etc/systemd/system/payment.service
   - name: systemctl daemon-reload
