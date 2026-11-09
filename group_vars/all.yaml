@@ -1,2 +1,3 @@
 ansible_user: ec2-user
 ansible_password: DevOps321
+mongo_host: mongodb.bhar92s.store
