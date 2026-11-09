@@ -50,7 +50,7 @@
   - name: Move the JAR file using Linux mv
     ansible.builtin.command: mv /path/to/source/app.jar /path/to/destination/app.jar
     args:
-    chdir: /app
+     chdir: /app
   - name: check cities loaded or not 
     shell: mysql -h "{{ mysql_host }}" -u root -p{{ mysql_root_password }} -N -B -e "SELECT COUNT(*) FROM cities.cities;"
     register: cities_count
