@@ -24,6 +24,7 @@
     service:
      name: mongod
      state: restarted
+     enabled: yes
   - name: print mongo.repo
     debug:
      msg: "{{ mongodb_hosts }}"    

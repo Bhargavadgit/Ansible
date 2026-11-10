@@ -1,11 +1,11 @@
 ansible_user: ec2-user
 ansible_password: DevOps321
 mongo_host: mongodb.bhar92s.store
-redis_host: mongodb.bhar92s.store
-mysql_host: mongodb.bhar92s.store
-rabbitmq_host: mongodb.bhar92s.store
-catalogue_host: mongodb.bhar92s.store
-user_host: mongodb.bhar92s.store
+redis_host: redis.bhar92s.store
+mysql_host: mysql.bhar92s.store
+rabbitmq_host: rabbitmq.bhar92s.store
+catalogue_host: catalogue.bhar92s.store
+user_host: user.bhar92s.store
 cart_host: cart.bhar92s.store
 shipping_host: shipping.bhar92s.store
 payment_host: payment.bhar92s.store
