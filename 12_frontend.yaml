@@ -19,8 +19,8 @@
      enabled: yes
   - name: Remove the default content
     ansible.builtin.file:
-    path: /usr/share/nginx/html/
-    state: absent
+     path: /usr/share/nginx/html/
+     state: absent
   - name: Download and extract the frontend content
     ansible.builtin.get_url:
      url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/frontend-v4.zip
@@ -37,5 +37,5 @@
     service: 
      name: nginx
      state: restarted
-     
+
  
