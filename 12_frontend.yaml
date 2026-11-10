@@ -12,26 +12,11 @@
       dnf:
        name: nginx
        state: present
-    - name: systemctl enable & start nginx   
-      service:
+    - name: enable & start nginx
+      service: 
        name: nginx
        state: started
        enabled: yes
-    # - name: Find all contents inside the directory
-    #   ansible.builtin.find:
-    #    paths: /usr/share/nginx/html/
-    #    recurse: true
-    #    hidden: true
-    #    file_type: any
-    #   register: directory_contents
-    # - name: check the default content 
-    #   debug:
-    #    msg: "{{ directory_contents  }}"
-    # - name: remove defalut content
-    #   ansible.builtin.file:
-    #    path: "{{ item.path }}"
-    #    state: absent
-    #    loop: "{{ directory_contents.file }}" 
     - name: Find default HTML content
       ansible.builtin.find:
        paths: /usr/share/nginx/html/
