@@ -52,11 +52,11 @@
       record: "{{ domain_name }}"
       type: A
       ttl: 1
-      value: "{{ item.instances[0].private_ip_address }}"
+      value: "{{ item.instances[0].public_ip_address }}"
       overwrite: true
     loop: "{{ ec2_instance.results }}"
-    when: state == "create" 
-    register: private_ip and item.item == "Frontend"
+    when: state == "create" and item.item == "Frontend"
+    register: public_ip 
    
 
   - name: R53_delete
