@@ -64,7 +64,6 @@
      state: present
   - name: check existing tems available
     command: mongosh --host {{ mongo_host }} --quiet --eval 'db.getSiblingDB("catalogue").products.countDocuments()'
-    ignore_errors: true
     register: items_output
 
   - name: itemlist
