@@ -17,13 +17,13 @@
        name: nginx
        state: started
        enabled: yes
-    - name: Remove the default content not dir
-      ansible.builtin.file:
-       path: /usr/share/nginx/html/
-       recursive: true
+    - name: Find all contents inside the directory
+      ansible.builtin.find:
+       paths: /usr/share/nginx/html/
+       recurse: true
        hidden: true
        file_type: any
-       register: directory_contents
+      register: directory_contents
     - name: check the default content 
       debug:
        msg: "{{ directory_contents  }}"
