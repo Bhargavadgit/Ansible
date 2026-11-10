@@ -11,7 +11,7 @@
   - name: install nginx  
     dnf:
      name: nginx
-     state: Present
+     state: present
   - name: systemctl enable & start nginx   
     service:
      name: nginx
