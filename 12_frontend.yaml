@@ -15,7 +15,7 @@
     - name: enable & start nginx
       service: 
        name: nginx
-       state: startedqq
+       state: started
        enabled: yes
     - name: Find default HTML content
       ansible.builtin.find:
