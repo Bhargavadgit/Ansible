@@ -30,6 +30,11 @@
      src: /tmp/frontend.zip
      dest: /usr/share/nginx/html 
      remote_src: yes
+  # - name: unzip frontend
+  #   unarchive:
+  #     src: /tmp/frontend.zip
+  #     dest: /usr/share/nginx/html/
+  #     remote_src: yes   
   - name: copy file use template to get domains
     ansible.builtin.template:
      src: roboshop.conf
