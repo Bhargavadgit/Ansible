@@ -42,7 +42,7 @@
      dest: /app  
      remote_src: yes
   - name: npm install    
-    ansible.builtin.file:
+    community.general.npm:
      path: /app  
   - name: copy repo with templite
     ansible.builtin.template:
