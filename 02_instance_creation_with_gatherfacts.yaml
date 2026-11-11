@@ -69,6 +69,19 @@
     loop: "{{ instances }}"   
     when: state == "delete" 
 
+  - name: R53_delete with public_ip
+    amazon.aws.route53:
+      state: absent
+      zone: "{{ domain_name }}"
+      record: "{{ domain_name }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].public_ip_address }}"
+      overwrite: true
+    loop: "{{ ec2_instance.results }}"
+    when: state == "create" and item.item == "Frontend"
+    register: public_ip   
+
   - name: ec2_instance termination
     amazon.aws.ec2_instance:
       name: "Roboshop-{{ item }}"
