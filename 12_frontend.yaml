@@ -3,11 +3,9 @@
   become: yes
   tasks:
   - name: disable nginx
-    dnf:
     commond: dnf module disable nginx -y
   - name: enable 
-    dnf:
-     commond: dnf module enable nginx:1.26 -y
+    commond: dnf module enable nginx:1.26 -y
   - name: install nginx
     dnf:
      name: nginx
