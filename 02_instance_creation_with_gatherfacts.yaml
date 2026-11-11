@@ -77,9 +77,8 @@
       type: A
       ttl: 1
       value: "{{ item.instances[0].public_ip_address }}"
-      overwrite: true
     loop: "{{ ec2_instance.results }}"
-    when: state == "create" and item.item == "Frontend"
+    when: state == "delete" 
     register: public_ip   
 
   - name: ec2_instance termination
