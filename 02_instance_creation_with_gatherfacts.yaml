@@ -42,7 +42,7 @@
       value: "{{ item.instances[0].private_ip_address }}"
       overwrite: true
     loop: "{{ ec2_instance.results }}"
-    when: state == "create"
+    when: state == "create" and item.item != "Frontend"
     register: Pravite_ip 
 
   - name: R53_creation with public_ip
@@ -77,7 +77,7 @@
       type: A
       ttl: 1
     loop: "{{ instances }}"
-    when: state == "delete" and item.item == "Frontend"
+    when: state == "delete" and item =="Frontend"
     register: public_ip   
 
   - name: ec2_instance termination
