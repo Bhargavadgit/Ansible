@@ -17,10 +17,10 @@
      enabled: yes
   - name: default content in side html 
     ansible.builtin.find:
-    paths: /usr/share/nginx/html/
-    recursive: true
-    hidden: true
-    file_type: any
+     paths: /usr/share/nginx/html/
+     recursive: true
+     hidden: true
+     file_type: any
     register: dir_contents
 
   - name: Remove the found files and subdirectories
@@ -46,7 +46,7 @@
     service: 
      name: nginx
      state: restarted
-        
+
  
 
 
