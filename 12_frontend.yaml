@@ -15,7 +15,38 @@
      name: nginx
      state: started
      enabled: yes
-            
+  - name: default content in side html 
+    ansible.builtin.find:
+    paths: /usr/share/nginx/html/
+    recursive: true
+    hidden: true
+    file_type: any
+    register: dir_contents
+
+  - name: Remove the found files and subdirectories
+    ansible.builtin.file:
+     path: "{{ item.path }}"
+     state: absent
+    loop: "{{ dir_contents.files }}"   
+
+  - name: Download package from URL
+    ansible.builtin.get_url:
+     url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/frontend-v4.zip
+     dest: /tmp/frontend.zip 
+  - name: unzip files
+    ansible.builtin.unarchive:
+     src: /tmp/frontend.zip
+     dest: /usr/share/nginx/html
+     remote_src: yes     
+  - name: copy files
+    template:
+     src: roboshop.conf
+     dest: /etc/nginx/default.d/roboshop.conf  
+  - name: restart
+    service: 
+     name: nginx
+     state: restarted
+        
  
 
 
