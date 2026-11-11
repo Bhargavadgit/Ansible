@@ -8,7 +8,8 @@
     instance_type: "t3.micro"
     hosted_zone: "Z07751372GOQ7XKXVY478"
     domain_name: "bhar92s.store"
-    instances: ["mongodb","redis","mysql","rabbitmq","catalogue","user","cart","shipping","payment","Frontend"]
+    instances: 
+     - frontend
   tasks:
   - name: ec2_instance creation
     amazon.aws.ec2_instance:
@@ -42,7 +43,7 @@
       value: "{{ item.instances[0].private_ip_address }}"
       overwrite: true
     loop: "{{ ec2_instance.results }}"
-    when: state == "create" and item.item != "Frontend"
+    when: state == "create"
     register: Pravite_ip 
 
   - name: R53_creation with public_ip
@@ -77,7 +78,7 @@
       type: A
       ttl: 1
     loop: "{{ instances }}"
-    when: state == "delete" and item =="Frontend"
+    when: state == "delete"
     register: public_ip   
 
   - name: ec2_instance termination
