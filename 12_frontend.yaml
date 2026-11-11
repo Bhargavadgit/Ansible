@@ -47,7 +47,7 @@
 
   - name: copy roboshop config
     template:
-      src: roboshop.conf.j2
+      src: roboshop.conf
       dest: /etc/nginx/default.d/roboshop.conf
    
   - name: restart frontend
