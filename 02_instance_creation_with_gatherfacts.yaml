@@ -77,7 +77,7 @@
       type: A
       ttl: 1
     loop: "{{ instances }}"
-    when: state == "delete" 
+    when: state == "delete" and item.item == "Frontend"
     register: public_ip   
 
   - name: ec2_instance termination
