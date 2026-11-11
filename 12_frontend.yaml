@@ -9,7 +9,13 @@
   - name: install
     dnf:
      name: nginx
-     state: present    
+     state: present
+  - name: start & enable
+    service:
+     name: nginx
+     state: started
+     enabled: yes
+            
  
 
 
