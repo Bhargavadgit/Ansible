@@ -63,7 +63,7 @@
     tags:
     - mysql
   - name: create app user
-    command: mysql -h "{{ mysql_host }}" -uroot -p"{{ mysql_root_password }}" < /app/db/app-user.sql  
+    command: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/app-user.sql  
     tags:
     - mysql
 
@@ -78,7 +78,7 @@
      name: shipping
      state: restarted
      enabled: yes
-      
+
 
        
 
