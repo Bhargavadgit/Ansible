@@ -76,8 +76,7 @@
       record: "{{ domain_name }}"
       type: A
       ttl: 1
-      value: "{{ item.instances[0].public_ip_address }}"
-    loop: "{{ ec2_instance.results }}"
+    loop: "{{ instances }}"
     when: state == "delete" 
     register: public_ip   
 
