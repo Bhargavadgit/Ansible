@@ -46,8 +46,9 @@
      command: mvn clean package
      chdir: /app
   - name: move target file to shipping file
-    command: mv target/shipping.jar shipping.jar
-    chdir: /app 
+    ansible.builtin.command:
+     command: mv target/shipping.jar shipping.jar
+     chdir: /app 
   - name: check cities is loaded or not 
     ansible.mysql.mysql_query:
      login_db: cities
