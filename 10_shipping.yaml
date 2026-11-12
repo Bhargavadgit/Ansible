@@ -60,6 +60,15 @@
      query: "SELECT count(*) FROM cities"
     register: city_count
     ignore_errors: true
+
+  - name: Check if cities are loaded in MySQL
+    ansible.mysql.mysql_query:
+      login_db: your_database_name
+      login_user: your_user
+      login_password: your_password
+      query: "SELECT city_name FROM cities WHERE city_name IN ('London', 'Paris', 'New York')"
+    register: city_check
+    
   # - name: check data exist or not
   #   command: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} -N -B -e "select count(*) from cities.cities;"
   #   register: cities_count
