@@ -57,7 +57,7 @@
     register: city_check
     ignore_errors: true
 
-  - name: Display query result
-    debug:
-     msg: "{{ city_check }}"
+  # - name: Display query result
+  #   debug:
+  #    msg: "{{ city_check }}"
 
