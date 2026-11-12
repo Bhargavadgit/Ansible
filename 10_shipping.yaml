@@ -52,15 +52,29 @@
     args:
      chdir: /app
 
-  - name: check cities is loaded or not 
-    ansible.mysql.mysql_query:
-     login_db: cities
-     login_host: "{{ mysql_host }}"
-     login_user: root
-     login_password: "{{ mysql_root_password }}"
-     query: "SELECT COUNT(*) FROM cities"
-    register: cities_count
+  # - name: check cities is loaded or not 
+  #   ansible.mysql.mysql_query:
+  #    login_db: cities
+  #    login_host: "{{ mysql_host }}"
+  #    login_user: root
+  #    login_password: "{{ mysql_root_password }}"
+  #    query: "SELECT COUNT(*) FROM cities"
+  #   register: cities_count
+  #   ignore_errors: true
+  - name: check cities is loaded or not
+    community.mysql.mysql_query:
+      login_db: cities
+      login_host: "{{ mysql_host }}"
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      query: "SELECT COUNT(*) FROM cities"
+    register: city_count
     ignore_errors: true
+
+  - name: print output
+    debug:
+      msg: "{{ city_count }}"
+
 
   # - name: check data exist or not
   #   command: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} -N -B -e "select count(*) from cities.cities;"
