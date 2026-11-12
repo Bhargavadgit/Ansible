@@ -55,7 +55,30 @@
   - name: check cities count
     command: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} -N -B -e "SELECT COUNT(*) from cities:cities;"
     register: cities_count
+    ignore_errors: true
 
   - name: cities_output
     debug:
      msg: "{{ cities_count }}"  
+
+  - name: load cities if not found
+    shell: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/master-data.sql 
+    when: cities_count.rc != 0 or cities_count.stdout | int == 0
+    
+  - name: add user to app
+    shell: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/app-user.sql    
+
+  - name: copy service file
+    template:
+     src: shipping.service.j2
+     dest: /etc/systemd/system/shipping.service
+
+  - name: systemctl daemon-reload
+    ansible.builtin.systemd_service:
+    daemon_reload: true
+
+  - name: enable & restart shipping
+    service:
+     name: shipping    
+     state: restarted
+     enabled: true
