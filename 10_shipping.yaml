@@ -75,4 +75,4 @@
     when: cities_count.rc != 0 or cities_count.stdout | int == 0
 
   - name: create user to access shipping 
-    command: mysql -h "{{ mysql_host }}" -uroot -p"{{ mysql_root_password }}" < /app/db/app-user.sql    
+    command: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/app-user.sql    
