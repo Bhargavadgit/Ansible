@@ -11,7 +11,7 @@
      - java-25-openjdk
      - maven openjdk25 
      - mysql
-    state: present
+     state: present
   - name: add user to application
     user: 
      name: roboshop
