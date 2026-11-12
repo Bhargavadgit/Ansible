@@ -70,10 +70,10 @@
   - name: print output
     debug:
      msg: "{{ cities_count }}"
-# doubt using"" to host but getting error while giving in password.
-  - name: load cities when cities are not exists
-    shell: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/master-data.sql 
-    when: cities_count.rc != 0 or cities_count.stdout | int == 0
+# # doubt using"" to host but getting error while giving in password.
+#   - name: load cities when cities are not exists
+#     shell: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/master-data.sql 
+#     when: cities_count.rc != 0 or cities_count.stdout | int == 0
 
-  - name: create user to access shipping 
-    shell: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/app-user.sql    
+#   - name: create user to access shipping 
+#     shell: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} < /app/db/app-user.sql    
