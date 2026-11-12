@@ -51,4 +51,11 @@
       cmd: mv target/shipping.jar shipping.jar
     args:
      chdir: /app
-  - name:
+
+  - name: check cities count
+    command: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} -N -B -e "SELECT COUNT(*) from cities:cities;"
+    register: cities_count
+
+  - name: cities_output
+    debug:
+     msg: "{{ cities_count }}"  
