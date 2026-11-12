@@ -43,9 +43,9 @@
      remote_src: yes
   - name: clean package
     ansible.builtin.command:
-     command: mvn clean package
-     args:
-      chdir: /app
+    command: mvn clean package
+    args:
+     chdir: /app
   - name: move target file to shipping file
     ansible.builtin.command:
     command: mv target/shipping.jar shipping.jar
