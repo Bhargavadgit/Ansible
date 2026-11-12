@@ -55,5 +55,5 @@
      login_user: "{{ mysql_host }}"
      login_password: "{{ mysql_root_password }}"
      query: "SELECT count(*) FROM cities"
-    register: city_count
-    ignore_errors: true
+     register: city_count
+     ignore_errors: true
