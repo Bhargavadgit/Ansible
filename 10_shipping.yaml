@@ -56,8 +56,3 @@
      query: "SELECT count(*) FROM cities
     register: city_check
     ignore_errors: true
-
-  # - name: Display query result
-  #   debug:
-  #    msg: "{{ city_check }}"
-
