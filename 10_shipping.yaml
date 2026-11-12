@@ -58,5 +58,5 @@
 
   - name: Display query result
     ansible.builtin.debug:
-      msg: "{{ city_check.query_result }}" 
-      
+      msg: city_check.query_result
+
