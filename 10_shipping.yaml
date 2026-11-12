@@ -36,29 +36,29 @@
     ansible.builtin.get_url:
      url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/shipping-v4.zip
      dest: /tmp/shipping.zip
-  # - name: Copy and unzip file 
-  #   ansible.builtin.unarchive:
-  #    src: /tmp/shipping.zip
-  #    dest: /app  
-  #    remote_src: yes
-  # - name: clean package
-  #   ansible.builtin.command:
-  #   command: mvn clean package
-  #   args:
-  #    chdir: /app
-  # - name: move target file to shipping file
-  #   ansible.builtin.command:
-  #   command: mv target/shipping.jar shipping.jar
-  #   args:
-  #    chdir: /app
-  # # - name: check cities is loaded or not 
-  # #   ansible.mysql.mysql_query:
-  # #    login_db: cities
-  # #    login_user: "{{ mysql_host }}"
-  # #    login_password: "{{ mysql_root_password }}"
-  # #    query: "SELECT count(*) FROM cities"
-  # #    register: city_count
-  # #    ignore_errors: true
+  - name: Copy and unzip file 
+    ansible.builtin.unarchive:
+     src: /tmp/shipping.zip
+     dest: /app  
+     remote_src: yes
+  - name: clean package
+    ansible.builtin.command:
+    command: mvn clean package
+    args:
+     chdir: /app
+  - name: move target file to shipping file
+    ansible.builtin.command:
+    command: mv target/shipping.jar shipping.jar
+    args:
+     chdir: /app
+  # - name: check cities is loaded or not 
+  #   ansible.mysql.mysql_query:
+  #    login_db: cities
+  #    login_user: "{{ mysql_host }}"
+  #    login_password: "{{ mysql_root_password }}"
+  #    query: "SELECT count(*) FROM cities"
+  #    register: city_count
+  #    ignore_errors: true
   # - name: check data exist or not
   #   command: mysql -h "{{ mysql_host }}" -uroot -p{{ mysql_root_password }} -N -B -e "select count(*) from cities.cities;"
   #   register: cities_count
